@@ -14,6 +14,14 @@ description:         Please see the README on GitHub at <https://github.com/Arth
 dependencies:
 - base >= 4.7 && < 5
 - process
+- text
+- bytestring
+
+default-extensions:
+- OverloadedStrings
+- LambdaCase
+- FlexibleInstances
+- RecordWildCards
 
 ghc-options:
 - -Wall
@@ -30,6 +38,7 @@ library:
   source-dirs: src
   dependencies:
   - process
+  - aeson
 
 tests:
   haskell-ffprobe-test:
@@ -41,3 +50,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - haskell-ffprobe
+    - hspec
+    - aeson
+    - hspec-expectations

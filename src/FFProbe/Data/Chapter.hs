@@ -1,6 +1,9 @@
 module FFProbe.Data.Chapter where
-import FFProbe.Data.Misc
 
+import Data.Aeson
+import FFProbe.Data.Misc
+import Text.Read (readMaybe)
+import Prelude hiding (id)
 
 data Chapter = Chapter
     { id :: Integer,
@@ -26,3 +29,17 @@ title chapter = do
         StringTag t -> return t
         _ -> Nothing
 
+instance FromJSON Chapter where
+    parseJSON = withObject "Chapter Entry" $ \v -> do
+        id <- v .: "id"
+        timeBase <- v .: "time_base"
+        sstartTime <- v .: "start_time"
+        sendTime <- v .: "end_time"
+        tags <- parseTags =<< v .: "tags"
+        startTime <- parseMaybe sstartTime
+        endTime <- parseMaybe sendTime
+        return Chapter {..}
+        where
+            parseMaybe n = case readMaybe n of
+                Nothing -> fail "Failed to read value to float"
+                Just x -> pure x

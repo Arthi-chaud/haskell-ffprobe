@@ -1,2 +1,6 @@
+import qualified FFProbe.Data.TestChapter as TestChapter
+import Test.Hspec
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = hspec $ do
+    TestChapter.specs
