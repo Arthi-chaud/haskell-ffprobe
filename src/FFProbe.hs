@@ -5,11 +5,13 @@ module FFProbe (
 import Data.Aeson (FromJSON, eitherDecodeStrict)
 import Data.ByteString.Char8 (pack)
 import FFProbe.Data.Chapter (Chapter)
+import FFProbe.Data.Format (Format)
 import FFProbe.Exec (execFFProbe)
 import GHC.Generics (Generic)
 
 data FFProbeData = FFProbeData
-    { chapters :: [Chapter]
+    { chapters :: [Chapter],
+      format :: Format
     }
     deriving (Generic)
 

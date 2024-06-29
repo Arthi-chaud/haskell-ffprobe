@@ -1,8 +1,8 @@
 module FFProbe.Data.Chapter where
 
 import Data.Aeson
-import FFProbe.Data.Misc
-import Text.Read (readMaybe)
+import FFProbe.Data.Tags
+import FFProbe.Utils (parseMaybe)
 import Prelude hiding (id)
 
 data Chapter = Chapter
@@ -17,6 +17,9 @@ data Chapter = Chapter
       tags :: TagList
     }
 
+instance HasTags Chapter where
+    getTags = tags
+
 -- | Gets the duration of the chapter, in seconds
 duration :: Chapter -> Float
 duration chapter = endTime chapter - startTime chapter
@@ -24,7 +27,7 @@ duration chapter = endTime chapter - startTime chapter
 -- | Retrieves the title of the chapter, from its tags
 title :: Chapter -> Maybe String
 title chapter = do
-    value <- lookup "title" (tags chapter)
+    value <- lookupTag "title" chapter
     case value of
         StringTag t -> return t
         _ -> Nothing
@@ -33,13 +36,7 @@ instance FromJSON Chapter where
     parseJSON = withObject "Chapter Entry" $ \v -> do
         id <- v .: "id"
         timeBase <- v .: "time_base"
-        sstartTime <- v .: "start_time"
-        sendTime <- v .: "end_time"
+        startTime <- parseMaybe =<< v .: "start_time"
+        endTime <- parseMaybe =<< v .: "end_time"
         tags <- parseTags =<< v .: "tags"
-        startTime <- parseMaybe sstartTime
-        endTime <- parseMaybe sendTime
         return Chapter {..}
-        where
-            parseMaybe n = case readMaybe n of
-                Nothing -> fail "Failed to read value to float"
-                Just x -> pure x

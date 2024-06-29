@@ -10,8 +10,8 @@ specs :: Spec
 specs = describe "Chapter Parsing" $ do
     it "Should Parse the correct values" $ do
         rawJson <- getAssetContent "chapter.json"
-        shouldBeJust
-            (decodeStrict rawJson)
+        shouldBeRight
+            (eitherDecodeStrict rawJson)
             ( \chapter -> do
                 id chapter `shouldBe` 8
                 timeBase chapter `shouldBe` "1/1000000000"

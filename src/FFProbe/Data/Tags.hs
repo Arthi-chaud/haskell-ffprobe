@@ -1,4 +1,4 @@
-module FFProbe.Data.Misc where
+module FFProbe.Data.Tags where
 
 import Data.Aeson
 import Data.Aeson.Key (toString)
@@ -15,6 +15,7 @@ data TagValue
     | FloatTag Float
     | -- | If the constructor is 'Other', the String is a JSON representation of the value
       Other String
+    deriving (Show, Eq)
 
 parseTags :: Value -> Parser TagList
 parseTags = withObject "Tags" $ \kvmap -> do
@@ -26,3 +27,9 @@ parseTags = withObject "Tags" $ \kvmap -> do
 instance FromJSON TagValue where
     parseJSON (String v) = return $ StringTag $ unpack v
     parseJSON x = return $ Other $ show x
+
+class HasTags a where
+    getTags :: a -> TagList
+
+lookupTag :: (HasTags a) => String -> a -> Maybe TagValue
+lookupTag key obj = lookup key (getTags obj)

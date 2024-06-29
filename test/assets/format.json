@@ -1,0 +1,16 @@
+{
+	"filename": "A.mkv",
+	"nb_streams": 5,
+	"nb_programs": 0,
+	"nb_stream_groups": 0,
+	"format_name": "matroska,webm",
+	"format_long_name": "Matroska / WebM",
+	"start_time": "0.000000",
+	"duration": "5272.960000",
+	"size": "3563706142",
+	"bit_rate": "5406763",
+	"probe_score": 100,
+	"tags": {
+		"ENCODER": "Lavf60.16.100"
+	}
+}

@@ -27,8 +27,10 @@ library
   exposed-modules:
       FFProbe
       FFProbe.Data.Chapter
-      FFProbe.Data.Misc
+      FFProbe.Data.Format
+      FFProbe.Data.Tags
       FFProbe.Exec
+      FFProbe.Utils
   other-modules:
       Paths_haskell_ffprobe
   autogen-modules:
@@ -55,6 +57,7 @@ test-suite haskell-ffprobe-test
   main-is: Spec.hs
   other-modules:
       FFProbe.Data.TestChapter
+      FFProbe.Data.TestFormat
       Utils
       Paths_haskell_ffprobe
   autogen-modules:
