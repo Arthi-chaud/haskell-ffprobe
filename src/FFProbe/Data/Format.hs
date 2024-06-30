@@ -18,7 +18,9 @@ data Format = Format
       size :: Integer,
       bitrate :: Integer,
       probeScore :: Integer,
-      tags :: TagList
+      tags :: TagList,
+      -- | The aeson object for the entire JSON received from ffprobe.
+      raw :: Object
     }
 
 instance HasTags Format where
@@ -26,6 +28,7 @@ instance HasTags Format where
 
 instance FromJSON Format where
     parseJSON = withObject "Format" $ \v -> do
+        let raw = v
         filename <- v .: "filename"
         streamsCount <- v .: "nb_streams"
         programsCount <- v .: "nb_programs"

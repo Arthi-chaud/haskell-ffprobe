@@ -14,7 +14,9 @@ data Chapter = Chapter
       -- | The timestamp, in seconds, of the end of the chapter
       endTime :: Float,
       -- | Additional tags
-      tags :: TagList
+      tags :: TagList,
+      -- | The aeson object for the entire JSON received from ffprobe.
+      raw :: Object
     }
 
 instance HasTags Chapter where
@@ -34,6 +36,7 @@ title chapter = do
 
 instance FromJSON Chapter where
     parseJSON = withObject "Chapter Entry" $ \v -> do
+        let raw = v
         id <- v .: "id"
         timeBase <- v .: "time_base"
         startTime <- parseReadable =<< v .: "start_time"

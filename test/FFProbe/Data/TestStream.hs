@@ -69,3 +69,26 @@ specs = describe "Stream Parsing" $ do
                 isDefault (disposition stream) `shouldBe` False
                 lookupTag "ENCODER" stream `shouldBe` Just (StringTag "Lavc60.31.102 libx264")
             )
+    it "Subtitle Stream" $ do
+        rawJson <- getAssetContent "stream-subtitle.json"
+        shouldBeRight
+            (eitherDecodeStrict rawJson)
+            ( \stream -> do
+                index stream `shouldBe` 3
+                codecName stream `shouldBe` "dvd_subtitle"
+                codecLongName stream `shouldBe` "DVD subtitles"
+                codecType stream `shouldBe` "subtitle"
+                streamType stream `shouldBe` SubtitleStream
+                codecTagString stream `shouldBe` "[0][0][0][0]"
+                codecTag stream `shouldBe` "0x0000"
+                rFrameRate stream `shouldBe` "0/0"
+                averageFrameRate stream `shouldBe` "0/0"
+                rFrameRate stream `shouldBe` "0/0"
+                timeBase stream `shouldBe` "1/1000"
+                startPts stream `shouldBe` 0
+                startTime stream `shouldBe` 0.0
+                duration stream `shouldBe` Just 5272.96
+                isDefault (disposition stream) `shouldBe` True
+                isForced (disposition stream) `shouldBe` False
+                lookupTag "language" stream `shouldBe` Just (StringTag "eng")
+            )

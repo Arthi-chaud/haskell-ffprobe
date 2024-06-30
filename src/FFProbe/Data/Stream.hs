@@ -89,6 +89,7 @@ data Stream = Stream
       timeBase :: String,
       startPts :: Integer,
       startTime :: Float,
+      -- | Duration of the stream, in seconds
       duration :: Maybe Float,
       bitRate :: Maybe Integer,
       bitsPerRawSample :: Maybe Integer,
@@ -111,7 +112,9 @@ data Stream = Stream
       sampleFmt :: Maybe String,
       sampleRate :: Maybe Integer,
       channels :: Maybe Integer,
-      channelLayout :: Maybe String
+      channelLayout :: Maybe String,
+      -- | The aeson object for the entire JSON received from ffprobe.
+      raw :: Object
     }
 
 instance HasTags Stream where
@@ -119,6 +122,7 @@ instance HasTags Stream where
 
 instance FromJSON Stream where
     parseJSON = withObject "Stream" $ \o -> do
+        let raw = o
         index <- o .: "index"
         codecName <- o .: "codec_name"
         codecLongName <- o .: "codec_long_name"
@@ -131,7 +135,7 @@ instance FromJSON Stream where
         timeBase <- o .: "time_base"
         startPts <- o .: "start_pts"
         startTime <- parseReadable =<< o .: "start_time"
-        duration <- o .:? "duration_ts"
+        duration <- parseOptionalValue =<< o .:? "duration"
         bitRate <- parseOptionalValue =<< o .:? "bit_rate"
         bitsPerRawSample <- parseOptionalValue =<< o .:? "bits_per_raw_sample"
         bitsPerSample <- o .:? "bits_per_sample"
