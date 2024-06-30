@@ -4,7 +4,6 @@ import Control.Applicative ((<|>))
 import Data.Aeson
 import Data.Aeson.Types (Parser)
 import Data.Text hiding (index)
-import FFProbe.Data.Format (Format)
 import FFProbe.Data.Tags (HasTags (..), TagList, parseTags)
 import FFProbe.Utils
 import Prelude hiding (id)
@@ -134,7 +133,7 @@ instance FromJSON Stream where
         startTime <- parseReadable =<< o .: "start_time"
         duration <- o .:? "duration_ts"
         bitRate <- parseOptionalValue =<< o .:? "bit_rate"
-        bitsPerRawSample <- o .:? "bits_per_raw_sample"
+        bitsPerRawSample <- parseOptionalValue =<< o .:? "bits_per_raw_sample"
         bitsPerSample <- o .:? "bits_per_sample"
         framesCount <- o .:? "nb_frames"
         tags <- parseTags =<< o .: "tags"
