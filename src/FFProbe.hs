@@ -1,5 +1,6 @@
 module FFProbe (
     ffprobe,
+    FFProbeData(..)
 ) where
 
 import Data.Aeson (FromJSON, eitherDecodeStrict)
@@ -22,6 +23,6 @@ instance FromJSON FFProbeData
 ffprobe :: String -> IO (Either String FFProbeData)
 ffprobe path = do
     probeRes <- execFFProbe path
-    case probeRes of
-        Right rawJson -> return $ eitherDecodeStrict (pack rawJson)
-        Left err -> return $ Left err
+    return $ case probeRes of
+        Right rawJson -> eitherDecodeStrict (pack rawJson)
+        Left err -> Left err

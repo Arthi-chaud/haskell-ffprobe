@@ -47,6 +47,19 @@ data StreamDisposition = StreamDisposition
       isStillImage :: Bool
     }
 
+
+isVideoStream :: Stream -> Bool
+isVideoStream = isStreamOfType VideoStream
+
+isAudioStream :: Stream -> Bool
+isAudioStream = isStreamOfType AudioStream
+
+isSubtitleStream :: Stream -> Bool
+isSubtitleStream = isStreamOfType SubtitleStream
+
+isStreamOfType :: StreamType -> Stream -> Bool
+isStreamOfType stype stream = stype == streamType stream
+
 instance FromJSON StreamDisposition where
     parseJSON = withObject "Disposition" $ \v -> do
         let getValue key = (parseDispositionValue =<< v .: key) <|> pure False
@@ -139,7 +152,7 @@ instance FromJSON Stream where
         bitRate <- parseOptionalValue =<< o .:? "bit_rate"
         bitsPerRawSample <- parseOptionalValue =<< o .:? "bits_per_raw_sample"
         bitsPerSample <- o .:? "bits_per_sample"
-        framesCount <- o .:? "nb_frames"
+        framesCount <- parseOptionalValue =<< o .:? "nb_frames"
         tags <- parseTags =<< o .: "tags"
         disposition <- o .: "disposition"
         fieldOrder <- o .:? "field_order"

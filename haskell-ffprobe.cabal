@@ -61,6 +61,7 @@ test-suite haskell-ffprobe-test
       FFProbe.Data.TestChapter
       FFProbe.Data.TestFormat
       FFProbe.Data.TestStream
+      FFProbe.TestFFProbe
       Utils
       Paths_haskell_ffprobe
   autogen-modules:
