@@ -1,10 +1,6 @@
-module FFProbe.Data.Tags where
+module FFProbe.Data.Tags (TagList, TagValue (..), HasTags (..), lookupTag) where
 
 import Data.Aeson
-import Data.Aeson.Key (toString)
-import Data.Aeson.KeyMap (toList)
-import Data.Aeson.Types (Parser)
-import Data.Bifunctor (Bifunctor (bimap))
 import Data.Scientific (floatingOrInteger)
 import Data.Text (unpack)
 
@@ -19,13 +15,6 @@ data TagValue
     | Null
     deriving (Show, Eq)
 
-parseTags :: Value -> Parser TagList
-parseTags = withObject "Tags" $ \kvmap -> do
-    pure $ map (bimap toString parseTag) (toList kvmap)
-    where
-        parseTag (String v) = StringTag $ unpack v
-        parseTag x = Other $ show x
-
 instance FromJSON TagValue where
     parseJSON (String v) = return $ StringTag $ unpack v
     parseJSON (Number v) = return $ either FloatTag IntTag (floatingOrInteger v)
@@ -35,5 +24,6 @@ instance FromJSON TagValue where
 class HasTags a where
     getTags :: a -> TagList
 
+-- | Lookup a tag in a TagList, using a key
 lookupTag :: (HasTags a) => String -> a -> Maybe TagValue
 lookupTag key obj = lookup key (getTags obj)

@@ -30,9 +30,10 @@ library
       FFProbe.Data.Format
       FFProbe.Data.Stream
       FFProbe.Data.Tags
-      FFProbe.Exec
-      FFProbe.Utils
   other-modules:
+      FFProbe.Data.Tags.Internal
+      FFProbe.Exec
+      FFProbe.Internal
       Paths_haskell_ffprobe
   autogen-modules:
       Paths_haskell_ffprobe
@@ -82,6 +83,4 @@ test-suite haskell-ffprobe-test
     , haskell-ffprobe
     , hspec
     , hspec-expectations
-    , process
-    , text
   default-language: Haskell2010

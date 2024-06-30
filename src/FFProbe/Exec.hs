@@ -3,7 +3,7 @@ module FFProbe.Exec (execFFProbe) where
 import Control.Exception (IOException, try)
 import Data.Bifunctor (first)
 import Data.Functor ((<&>))
-import System.Process (readCreateProcess, proc)
+import System.Process (proc, readCreateProcess)
 
 -- | Runs ffprobes, returns the output of the command
 execFFProbe :: String -> IO (Either String String)

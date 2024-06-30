@@ -1,11 +1,20 @@
-module FFProbe.Data.Stream where
+module FFProbe.Data.Stream (
+    Stream (..),
+    StreamType (..),
+    isVideoStream,
+    isAudioStream,
+    isSubtitleStream,
+    isStreamOfType,
+    StreamDisposition (..),
+) where
 
 import Control.Applicative ((<|>))
 import Data.Aeson
 import Data.Aeson.Types (Parser)
 import Data.Text hiding (index)
-import FFProbe.Data.Tags (HasTags (..), TagList, parseTags)
-import FFProbe.Utils
+import FFProbe.Data.Tags (HasTags (..), TagList)
+import FFProbe.Data.Tags.Internal
+import FFProbe.Internal
 import Prelude hiding (id)
 
 data StreamType
@@ -46,7 +55,6 @@ data StreamDisposition = StreamDisposition
       isDependent :: Bool,
       isStillImage :: Bool
     }
-
 
 isVideoStream :: Stream -> Bool
 isVideoStream = isStreamOfType VideoStream

@@ -1,8 +1,9 @@
-module FFProbe.Data.Chapter where
+module FFProbe.Data.Chapter (Chapter (..), duration, title) where
 
 import Data.Aeson
 import FFProbe.Data.Tags
-import FFProbe.Utils (parseReadable)
+import FFProbe.Data.Tags.Internal
+import FFProbe.Internal (parseReadable)
 import Prelude hiding (id)
 
 data Chapter = Chapter
@@ -26,7 +27,7 @@ instance HasTags Chapter where
 duration :: Chapter -> Float
 duration chapter = endTime chapter - startTime chapter
 
--- | Retrieves the title of the chapter, from its tags
+-- | Retrieves the title of the chapter, using its tags
 title :: Chapter -> Maybe String
 title chapter = do
     value <- lookupTag "title" chapter

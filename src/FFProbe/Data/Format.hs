@@ -1,8 +1,9 @@
-module FFProbe.Data.Format where
+module FFProbe.Data.Format (Format (..)) where
 
 import Data.Aeson.Types
 import FFProbe.Data.Tags
-import FFProbe.Utils (parseReadable)
+import FFProbe.Data.Tags.Internal
+import FFProbe.Internal (parseReadable)
 
 data Format = Format
     { filename :: String,

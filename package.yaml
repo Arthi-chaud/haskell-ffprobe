@@ -13,9 +13,6 @@ description:         Please see the README on GitHub at <https://github.com/Arth
 
 dependencies:
 - base >= 4.7 && < 5
-- process
-- text
-- bytestring
 
 default-extensions:
 - OverloadedStrings
@@ -41,6 +38,14 @@ library:
   - process
   - aeson
   - scientific
+  - text
+  - bytestring
+  exposed-modules:
+  - FFProbe
+  - FFProbe.Data.Chapter
+  - FFProbe.Data.Format
+  - FFProbe.Data.Stream
+  - FFProbe.Data.Tags
 
 tests:
   haskell-ffprobe-test:
@@ -54,4 +59,5 @@ tests:
     - haskell-ffprobe
     - hspec
     - aeson
+    - bytestring
     - hspec-expectations

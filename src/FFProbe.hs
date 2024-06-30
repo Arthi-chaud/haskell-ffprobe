@@ -1,6 +1,6 @@
 module FFProbe (
     ffprobe,
-    FFProbeData(..)
+    FFProbeData (..),
 ) where
 
 import Data.Aeson (FromJSON, eitherDecodeStrict)
@@ -20,6 +20,7 @@ data FFProbeData = FFProbeData
 
 instance FromJSON FFProbeData
 
+-- | Runs the ffprobe coomands, and parse its output
 ffprobe :: String -> IO (Either String FFProbeData)
 ffprobe path = do
     probeRes <- execFFProbe path

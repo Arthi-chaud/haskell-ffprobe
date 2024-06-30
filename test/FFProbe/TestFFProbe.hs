@@ -1,10 +1,10 @@
-module FFProbe.TestFFProbe where
+module FFProbe.TestFFProbe (specs) where
 
 import FFProbe
+import FFProbe.Data.Chapter
+import FFProbe.Data.Stream
 import Test.Hspec
 import Utils (shouldBeRight)
-import FFProbe.Data.Stream
-import FFProbe.Data.Chapter
 
 specs :: Spec
 specs = describe "Running ffprobe" $ do

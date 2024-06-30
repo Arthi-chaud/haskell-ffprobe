@@ -1,4 +1,4 @@
-module FFProbe.Utils (parseReadable, parseOptionalValue) where
+module FFProbe.Internal (parseReadable, parseOptionalValue) where
 
 import Data.Aeson.Types (Parser)
 import Text.Read (readMaybe)
