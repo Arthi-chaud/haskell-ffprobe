@@ -13,7 +13,7 @@ specs = describe "Chapter Parsing" $ do
         shouldBeRight
             (eitherDecodeStrict rawJson)
             ( \chapter -> do
-                id chapter `shouldBe` 8
+                FFProbe.Data.Chapter.id chapter `shouldBe` 8
                 timeBase chapter `shouldBe` "1/1000000000"
                 startTime chapter `shouldBe` 0.0
                 endTime chapter `shouldBe` 117.56
