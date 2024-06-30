@@ -1,8 +1,8 @@
 module FFProbe.Data.Format where
 
-import Data.Aeson.Types hiding (parseMaybe)
+import Data.Aeson.Types
 import FFProbe.Data.Tags
-import FFProbe.Utils (parseMaybe)
+import FFProbe.Utils (parseReadable)
 
 data Format = Format
     { filename :: String,
@@ -32,10 +32,10 @@ instance FromJSON Format where
         streamGroupsCount <- v .: "nb_stream_groups"
         formatName <- v .: "format_name"
         formatLongName <- v .: "format_long_name"
-        startTime <- parseMaybe =<< v .: "start_time"
-        duration <- parseMaybe =<< v .: "duration"
-        size <- parseMaybe =<< v .: "size"
-        bitrate <- parseMaybe =<< v .: "bit_rate"
+        startTime <- parseReadable =<< v .: "start_time"
+        duration <- parseReadable =<< v .: "duration"
+        size <- parseReadable =<< v .: "size"
+        bitrate <- parseReadable =<< v .: "bit_rate"
         probeScore <- v .: "probe_score"
         tags <- parseTags =<< v .: "tags"
         return Format {..}

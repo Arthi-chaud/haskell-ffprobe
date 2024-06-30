@@ -6,11 +6,13 @@ import Data.Aeson (FromJSON, eitherDecodeStrict)
 import Data.ByteString.Char8 (pack)
 import FFProbe.Data.Chapter (Chapter)
 import FFProbe.Data.Format (Format)
+import FFProbe.Data.Stream (Stream)
 import FFProbe.Exec (execFFProbe)
 import GHC.Generics (Generic)
 
 data FFProbeData = FFProbeData
-    { chapters :: [Chapter],
+    { streams :: [Stream],
+      chapters :: [Chapter],
       format :: Format
     }
     deriving (Generic)

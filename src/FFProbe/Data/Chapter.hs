@@ -2,7 +2,7 @@ module FFProbe.Data.Chapter where
 
 import Data.Aeson
 import FFProbe.Data.Tags
-import FFProbe.Utils (parseMaybe)
+import FFProbe.Utils (parseReadable)
 import Prelude hiding (id)
 
 data Chapter = Chapter
@@ -36,7 +36,7 @@ instance FromJSON Chapter where
     parseJSON = withObject "Chapter Entry" $ \v -> do
         id <- v .: "id"
         timeBase <- v .: "time_base"
-        startTime <- parseMaybe =<< v .: "start_time"
-        endTime <- parseMaybe =<< v .: "end_time"
+        startTime <- parseReadable =<< v .: "start_time"
+        endTime <- parseReadable =<< v .: "end_time"
         tags <- parseTags =<< v .: "tags"
         return Chapter {..}
