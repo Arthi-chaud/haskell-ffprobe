@@ -1,4 +1,4 @@
-module Utils where
+module Utils (getAssetContent, shouldBeRight) where
 
 import Data.ByteString
 import Test.Hspec.Expectations
