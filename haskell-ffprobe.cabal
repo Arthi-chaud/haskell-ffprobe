@@ -5,7 +5,7 @@ cabal-version: 2.2
 -- see: https://github.com/sol/hpack
 
 name:           haskell-ffprobe
-version:        0.1.0.0
+version:        0.1.0.1
 synopsis:       Haskell bindings for ffprobe
 description:    Use ffprobe data in Haskell. Checkout the README on GitHub for an example.
 category:       Bindings

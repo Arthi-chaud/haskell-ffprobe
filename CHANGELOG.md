@@ -9,3 +9,7 @@ and this project adheres to the
 ## 0.1.0.0 - 2024-07-01
 
 First release!
+
+## 0.1.0.1 - 2024-08-10
+
+Fixing handling of non-ascii characters in ffprobe's output

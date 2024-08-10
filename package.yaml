@@ -1,5 +1,5 @@
 name:                haskell-ffprobe
-version:             0.1.0.0
+version:             0.1.0.1
 github:              "Arthi-chaud/haskell-ffprobe"
 license:             BSD-3-Clause
 author:              "Arthi-chaud"
