@@ -4,7 +4,8 @@ module FFProbe (
 ) where
 
 import Data.Aeson (FromJSON, eitherDecodeStrict)
-import Data.ByteString.Char8 (pack)
+import Data.Text (pack)
+import Data.Text.Encoding (encodeUtf8)
 import FFProbe.Data.Chapter (Chapter)
 import FFProbe.Data.Format (Format)
 import FFProbe.Data.Stream (Stream)
@@ -25,5 +26,5 @@ ffprobe :: String -> IO (Either String FFProbeData)
 ffprobe path = do
     probeRes <- execFFProbe path
     return $ case probeRes of
-        Right rawJson -> eitherDecodeStrict (pack rawJson)
+        Right rawJson -> eitherDecodeStrict (encodeUtf8 $ pack rawJson)
         Left err -> Left err
