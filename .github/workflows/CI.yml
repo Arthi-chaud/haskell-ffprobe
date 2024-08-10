@@ -81,6 +81,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
+      - run: sudo apt update && sudo apt install -y ffmpeg
       - name: Setup GHC
         uses: ./.github/actions/cache
       - name: Run unit tests
