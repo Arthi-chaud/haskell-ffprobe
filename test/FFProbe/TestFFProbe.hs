@@ -25,3 +25,10 @@ specs = describe "Running ffprobe" $ do
                 title (chapters ffprobeData !! 1) `shouldBe` Just "Middle"
                 title (chapters ffprobeData !! 2) `shouldBe` Just "End"
             )
+    it "Should Succeed at parsing unicode characters" $ do
+        res <- ffprobe "test/assets/test-unicode.mp4"
+        shouldBeRight
+            res
+            ( \ffprobeData -> do
+                title (head (chapters ffprobeData)) `shouldBe` Just "Début"
+            )
