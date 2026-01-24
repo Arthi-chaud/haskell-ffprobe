@@ -1,63 +1,63 @@
-name:                haskell-ffprobe
-version:             0.1.0.1
-github:              "Arthi-chaud/haskell-ffprobe"
-license:             BSD-3-Clause
-author:              "Arthi-chaud"
-copyright:           "2024 Arthi-chaud"
-synopsis:            Haskell bindings for ffprobe
-category:            Bindings
+name: haskell-ffprobe
+version: 0.1.0.1
+github: "Arthi-chaud/haskell-ffprobe"
+license: BSD-3-Clause
+author: "Arthi-chaud"
+copyright: "2024 Arthi-chaud"
+synopsis: Haskell bindings for ffprobe
+category: Bindings
 
 extra-doc-files:
-- README.md
-- CHANGELOG.md
+  - README.md
+  - CHANGELOG.md
 
-description:         Use ffprobe data in Haskell. Checkout the README on GitHub for an example.
+description: Use ffprobe data in Haskell. Checkout the README on GitHub for an example.
 
 dependencies:
-- base >= 4.7 && < 5
-- aeson >= 2.1.2.1 && <= 2.2.3.0
-- bytestring >= 0.11.5 && < 0.12
+  - base >= 4.7 && < 5
+  - aeson >= 2.1.2.1 && <= 2.2.3.0
+  - bytestring >= 0.11.5 && <= 0.12.2.0
 
 default-extensions:
-- OverloadedStrings
-- LambdaCase
-- FlexibleInstances
-- RecordWildCards
-- DeriveGeneric
+  - OverloadedStrings
+  - LambdaCase
+  - FlexibleInstances
+  - RecordWildCards
+  - DeriveGeneric
 
 ghc-options:
-- -Wall
-- -Wcompat
-- -Widentities
-- -Wincomplete-record-updates
-- -Wincomplete-uni-patterns
-- -Wmissing-export-lists
-- -Wmissing-home-modules
-- -Wpartial-fields
-- -Wredundant-constraints
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
 
 library:
   source-dirs: src
   dependencies:
-  - process >= 1.6.18 && < 1.7
-  - scientific >= 0.3.7 && <= 0.3.8.0
-  - text >= 2.0.2 && < 2.1
+    - process >= 1.6.18 && < 1.7
+    - scientific >= 0.3.7 && <= 0.3.8.0
+    - text >=2.0.2 && < 2.2
   exposed-modules:
-  - FFProbe
-  - FFProbe.Data.Chapter
-  - FFProbe.Data.Format
-  - FFProbe.Data.Stream
-  - FFProbe.Data.Tags
+    - FFProbe
+    - FFProbe.Data.Chapter
+    - FFProbe.Data.Format
+    - FFProbe.Data.Stream
+    - FFProbe.Data.Tags
 
 tests:
   haskell-ffprobe-test:
-    main:                Spec.hs
-    source-dirs:         test
+    main: Spec.hs
+    source-dirs: test
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - haskell-ffprobe
-    - hspec
-    - hspec-expectations
+      - haskell-ffprobe
+      - hspec
+      - hspec-expectations

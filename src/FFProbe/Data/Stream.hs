@@ -33,7 +33,7 @@ instance FromJSON StreamType where
     parseJSON (String "data") = return DataStream
     parseJSON (String "attachment") = return Attachment
     parseJSON (String s) = return $ Other (unpack s)
-    parseJSON x = return $ Other (show x)
+    parseJSON x = return $ Other (Prelude.show x)
 
 data StreamDisposition = StreamDisposition
     { isDefault :: Bool,
@@ -94,7 +94,7 @@ instance FromJSON StreamDisposition where
             parseDispositionValue :: Int -> Parser Bool
             parseDispositionValue 0 = return False
             parseDispositionValue 1 = return True
-            parseDispositionValue n = fail $ "Expected 0 or 1. Got " ++ show n
+            parseDispositionValue n = fail $ "Expected 0 or 1. Got " ++ Prelude.show n
 
 data Stream = Stream
     { index :: Integer,
