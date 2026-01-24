@@ -1,7 +1,8 @@
-resolver: lts-21.25
+resolver: lts-24.28
 
 packages:
-- .
+  - .
 
-extra-deps: []
+extra-deps:
+  - scientific-0.3.8.0
 system-ghc: true
