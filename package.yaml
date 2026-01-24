@@ -40,7 +40,7 @@ library:
   source-dirs: src
   dependencies:
     - process >= 1.6.18 && < 1.7
-    - scientific >= 0.3.7 && <= 0.3.8.0
+    - scientific >= 0.3.7 && < 0.3.9.0
     - text >=2.0.2 && < 2.2
   exposed-modules:
     - FFProbe
